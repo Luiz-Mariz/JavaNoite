@@ -1,33 +1,31 @@
 package Exercicio2.Program;
 
-import Exercicio2.Employee.Employee;
+import Exercicio2.ContaBancaria.ContaBancaria;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Program {
     public static void main(String[] args) {
 
-        Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
-        Employee employee = new Employee();
+        ContaBancaria contaBancaria = new ContaBancaria();
 
-        System.out.print("Name: ");
-        employee.setName(sc.nextLine());
-
-        System.out.print("Gross salary: ");
-        employee.setGrossSalary(sc.nextDouble());
-
-        System.out.print("Tax: ");
-        employee.setTax(sc.nextDouble());
-
-        System.out.printf("%nEmployee: %s, R$ %.2f%n%n", employee.getName(), employee.NetSalary());
-
-        System.out.print("Which percentage to increse salary? ");
-        employee.IncreaseSalary(sc.nextDouble());
+        System.out.print("Informe o titular: ");
+        contaBancaria.setTitular(sc.nextLine());
+        System.out.print("Informe o saldo: ");
+        contaBancaria.setSaldo(sc.nextDouble());
 
         System.out.println();
-        System.out.printf("Employee: %s, R$ %.2f", employee.getName(), employee.getGrossSalary());
+        System.out.print("Deseja depositar (s/n): ");
+        boolean confirmacaoedDeposito = contaBancaria.ConfirmacaoDeposito(sc.next().charAt(0));
+        contaBancaria.Depositar(confirmacaoedDeposito);
 
+        System.out.println();
+        System.out.print("Deseja sacar (s/n): ");
+        boolean confirmacaoSaque = contaBancaria.ConfirmacaoSaque(sc.next().charAt(0));
+        contaBancaria.Sacar(confirmacaoSaque);
+
+        System.out.println("Saldo final: " + contaBancaria.getSaldo());
+        sc.close();
     }
 }
